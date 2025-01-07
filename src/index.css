@@ -29,7 +29,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(180deg, rgba(255,228,225,0.2) 0%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(180deg, rgba(255,105,180,0.2) 0%, rgba(255,255,255,1) 100%);
 }
 
 .product-card {
@@ -42,4 +42,20 @@
 
 .product-card:hover img {
   @apply scale-105;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
 }

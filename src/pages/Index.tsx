@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navigation from "../components/Navigation";
 import FlowerModel from "../components/FlowerModel";
 import ProductCard from "../components/ProductCard";
@@ -10,15 +11,37 @@ const Index = () => {
     { id: 4, title: "Luxury Peonies", price: "149.99", image: "/placeholder.svg" },
   ];
 
+  useEffect(() => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          entry.target.classList.add('opacity-100');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.scroll-animate').forEach((element) => {
+      element.classList.add('opacity-0');
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-white">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="hero-gradient min-h-screen flex items-center relative">
+      <section className="min-h-screen flex items-center relative overflow-hidden">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 animate-fade-up">
-            <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6">
+            <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6 text-primary-dark">
               Beautiful Blooms for Every Occasion
             </h1>
             <p className="text-lg mb-8 text-gray-600">
@@ -32,20 +55,31 @@ const Index = () => {
             <FlowerModel />
           </div>
         </div>
+
+        {/* Decorative floating flowers */}
+        <div className="absolute -left-10 top-1/4 w-20 h-20 animate-float opacity-50">
+          <img src="/placeholder.svg" alt="" className="animate-spin-slow" />
+        </div>
+        <div className="absolute -right-10 top-3/4 w-16 h-16 animate-float opacity-50 delay-300">
+          <img src="/placeholder.svg" alt="" className="animate-spin-slow" />
+        </div>
       </section>
 
       {/* Featured Products */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-playfair text-center mb-12">Featured Collections</h2>
+          <h2 className="text-4xl font-playfair text-center mb-12 text-primary-dark scroll-animate">
+            Featured Collections
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                image={product.image}
-                title={product.title}
-                price={product.price}
-              />
+            {products.map((product, index) => (
+              <div key={product.id} className={`scroll-animate delay-${index * 100}`}>
+                <ProductCard
+                  image={product.image}
+                  title={product.title}
+                  price={product.price}
+                />
+              </div>
             ))}
           </div>
         </div>

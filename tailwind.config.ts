@@ -25,19 +25,19 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FFE4E1",
-          dark: "#FFD1CC",
-          foreground: "#2D3436",
-        },
-        secondary: {
-          DEFAULT: "#9DB5B2",
-          dark: "#8CA3A0",
+          DEFAULT: "#D946EF", // Bright pink
+          dark: "#BE185D",
           foreground: "#FFFFFF",
         },
-        accent: {
-          DEFAULT: "#F5DEB3",
-          dark: "#E6CFA4",
+        secondary: {
+          DEFAULT: "#FFDEE2", // Soft pink
+          dark: "#FFC0CB",
           foreground: "#2D3436",
+        },
+        accent: {
+          DEFAULT: "#FF69B4", // Hot pink
+          dark: "#FF1493",
+          foreground: "#FFFFFF",
         },
       },
       fontFamily: {
@@ -63,10 +63,28 @@ export default {
             opacity: "1",
           },
         },
+        "float": {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-20px)",
+          },
+        },
+        "spin-slow": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
+        "float": "float 3s ease-in-out infinite",
+        "spin-slow": "spin-slow 10s linear infinite",
       },
     },
   },

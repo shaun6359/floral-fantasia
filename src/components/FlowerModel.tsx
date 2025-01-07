@@ -15,17 +15,39 @@ const FlowerModel = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create a simple flower representation (placeholder)
-    const geometry = new THREE.TorusGeometry(1, 0.3, 16, 100);
-    const material = new THREE.MeshPhongMaterial({ color: 0xffe4e1 });
-    const flower = new THREE.Mesh(geometry, material);
-    scene.add(flower);
+    // Create rose petals
+    const createPetal = () => {
+      const petalShape = new THREE.Shape();
+      petalShape.moveTo(0, 0);
+      petalShape.quadraticCurveTo(1, 1, 0, 2);
+      petalShape.quadraticCurveTo(-1, 1, 0, 0);
+
+      const geometry = new THREE.ShapeGeometry(petalShape);
+      const material = new THREE.MeshPhongMaterial({ 
+        color: 0xD946EF,
+        side: THREE.DoubleSide,
+        shininess: 100
+      });
+      return new THREE.Mesh(geometry, material);
+    };
+
+    // Create rose
+    const rose = new THREE.Group();
+    const petalCount = 20;
+    for (let i = 0; i < petalCount; i++) {
+      const petal = createPetal();
+      petal.rotation.z = (i / petalCount) * Math.PI * 2;
+      petal.rotation.x = Math.PI / 4;
+      petal.position.z = i * 0.1;
+      rose.add(petal);
+    }
+    scene.add(rose);
 
     // Add lighting
-    const ambientLight = new THREE.AmbientLight(0x404040);
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
     scene.add(ambientLight);
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
     directionalLight.position.set(1, 1, 1);
     scene.add(directionalLight);
 
@@ -34,8 +56,7 @@ const FlowerModel = () => {
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-      flower.rotation.x += 0.005;
-      flower.rotation.y += 0.005;
+      rose.rotation.y += 0.01;
       renderer.render(scene, camera);
     };
     animate();
