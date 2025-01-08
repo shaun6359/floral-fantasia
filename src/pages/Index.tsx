@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import FlowerModel from "../components/FlowerModel";
 import ProductCard from "../components/ProductCard";
+import FallingPetals from "../components/FallingPetals";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-white">
+      <FallingPetals />
       <Navigation />
       
       {/* Hero Section */}
