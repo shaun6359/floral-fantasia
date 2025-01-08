@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import FlowerModel from "../components/FlowerModel";
 import ProductCard from "../components/ProductCard";
 
 const Index = () => {
+  const navigate = useNavigate();
   const products = [
     { id: 1, title: "Spring Bouquet", price: "89.99", image: "/placeholder.svg" },
     { id: 2, title: "Rose Collection", price: "129.99", image: "/placeholder.svg" },
@@ -47,7 +49,10 @@ const Index = () => {
             <p className="text-lg mb-8 text-gray-600">
               Discover our handcrafted bouquets and bring nature's beauty into your home.
             </p>
-            <button className="bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-3 rounded-full transition-colors">
+            <button 
+              onClick={() => navigate('/shop')}
+              className="bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-3 rounded-full transition-colors"
+            >
               Shop Now
             </button>
           </div>
