@@ -131,7 +131,7 @@ const FlowerModel = () => {
 
       // Subtle petal movement
       flower.children.forEach((child, index) => {
-        if (child.type === 'Mesh' && child.geometry.type === 'ShapeGeometry') {
+        if (child instanceof THREE.Mesh && child.geometry instanceof THREE.ShapeGeometry) {
           child.rotation.z += Math.sin(time + index) * 0.001;
         }
       });
