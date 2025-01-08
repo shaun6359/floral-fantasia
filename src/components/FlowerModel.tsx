@@ -15,48 +15,87 @@ const FlowerModel = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create rose petals
-    const createPetal = () => {
-      const petalShape = new THREE.Shape();
-      petalShape.moveTo(0, 0);
-      petalShape.quadraticCurveTo(1, 1, 0, 2);
-      petalShape.quadraticCurveTo(-1, 1, 0, 0);
+    // Create flower parts
+    const flower = new THREE.Group();
 
-      const geometry = new THREE.ShapeGeometry(petalShape);
-      const material = new THREE.MeshPhongMaterial({ 
-        color: 0xD946EF,
-        side: THREE.DoubleSide,
-        shininess: 100
-      });
-      return new THREE.Mesh(geometry, material);
-    };
+    // Create center of the flower
+    const centerGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+    const centerMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0xffeb3b,
+      shininess: 100
+    });
+    const center = new THREE.Mesh(centerGeometry, centerMaterial);
+    flower.add(center);
 
-    // Create rose
-    const rose = new THREE.Group();
-    const petalCount = 20;
+    // Create petals
+    const petalCount = 8;
+    const petalShape = new THREE.Shape();
+    petalShape.moveTo(0, 0);
+    petalShape.quadraticCurveTo(0.5, 0.5, 0, 1.5);
+    petalShape.quadraticCurveTo(-0.5, 0.5, 0, 0);
+
+    const petalGeometry = new THREE.ShapeGeometry(petalShape);
+    const petalMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0xD946EF, // Pink color matching the theme
+      side: THREE.DoubleSide,
+      shininess: 100
+    });
+
     for (let i = 0; i < petalCount; i++) {
-      const petal = createPetal();
+      const petal = new THREE.Mesh(petalGeometry, petalMaterial);
       petal.rotation.z = (i / petalCount) * Math.PI * 2;
-      petal.rotation.x = Math.PI / 4;
-      petal.position.z = i * 0.1;
-      rose.add(petal);
+      petal.position.z = 0.1;
+      flower.add(petal);
     }
-    scene.add(rose);
+
+    // Create stem
+    const stemGeometry = new THREE.CylinderGeometry(0.1, 0.1, 3, 32);
+    const stemMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0x4CAF50,
+      shininess: 30
+    });
+    const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+    stem.position.y = -1.5;
+    flower.add(stem);
+
+    // Add leaf
+    const leafShape = new THREE.Shape();
+    leafShape.moveTo(0, 0);
+    leafShape.quadraticCurveTo(0.5, 0.2, 0, 1);
+    leafShape.quadraticCurveTo(-0.5, 0.2, 0, 0);
+
+    const leafGeometry = new THREE.ShapeGeometry(leafShape);
+    const leafMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0x4CAF50,
+      side: THREE.DoubleSide,
+      shininess: 30
+    });
+
+    const leaf = new THREE.Mesh(leafGeometry, leafMaterial);
+    leaf.position.y = -1;
+    leaf.rotation.x = Math.PI / 4;
+    flower.add(leaf);
+
+    scene.add(flower);
 
     // Add lighting
-    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-    directionalLight.position.set(1, 1, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
+
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    backLight.position.set(-5, 5, -5);
+    scene.add(backLight);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-      rose.rotation.y += 0.01;
+      flower.rotation.y += 0.005;
       renderer.render(scene, camera);
     };
     animate();
