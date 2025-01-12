@@ -6,22 +6,22 @@ import { motion } from "framer-motion";
 const Shop = () => {
   const products = [
     {
-      image: "/placeholder.svg",
+      image: "/Rose Bouqet.jpg",
       title: "Rose Bouquet",
       price: "49.99"
     },
     {
-      image: "/placeholder.svg",
+      image: "/Tulip Arrangment.jpg",
       title: "Tulip Arrangement",
       price: "39.99"
     },
     {
-      image: "/placeholder.svg",
+      image: "/Sunflower Bundle.jpg",
       title: "Sunflower Bundle",
       price: "44.99"
     },
     {
-      image: "/placeholder.svg",
+      image: "/Mixed Seasonal.png",
       title: "Mixed Seasonal",
       price: "59.99"
     }
