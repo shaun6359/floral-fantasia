@@ -11,7 +11,7 @@ const Shop = () => {
       price: "49.99"
     },
     {
-      image: "/Tulip Arrangment.jpg",
+      image: "/Tulip Arrangement.jpg",
       title: "Tulip Arrangement",
       price: "39.99"
     },
