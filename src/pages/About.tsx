@@ -16,7 +16,7 @@ const About = () => {
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
-            src="/placeholder.svg"
+            src="/People with Flowers.jpg"
             alt="Flower shop"
             className="w-full h-64 object-cover rounded-lg mb-8"
           />
