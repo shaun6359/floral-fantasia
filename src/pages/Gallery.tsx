@@ -9,32 +9,32 @@ const Gallery = () => {
 
   const images = [
     {
-      src: "/spring",
+      src: "/spring.png",
       title: "Spring Bouquet",
       description: "A vibrant arrangement featuring fresh spring flowers in full bloom. This stunning collection includes tulips, daffodils, and cherry blossoms."
     },
     {
-      src: "/spring bouquet",
+      src: "/spring bouquet.png",
       title: "Summer Garden",
       description: "A bright and cheerful mix of summer favorites including sunflowers, daisies, and wildflowers. Perfect for bringing the warmth of summer indoors."
     },
     {
-      src: "/romantic rose",
+      src: "/romantic rose.png",
       title: "Romantic Rose Collection",
       description: "An elegant arrangement of premium roses in various shades of pink and red. Ideal for expressing love and appreciation."
     },
     {
-      src: "/tropical paradise",
+      src: "/tropical paradise.png",
       title: "Tropical Paradise",
       description: "An exotic blend of tropical flowers including birds of paradise, orchids, and hibiscus. Brings a touch of paradise to any space."
     },
     {
-      src: "/winter",
+      src: "/winter.png",
       title: "Winter Wonderland",
       description: "A magical arrangement featuring white roses, silver-dusted eucalyptus, and winter berries. Perfect for winter celebrations."
     },
     {
-      src: "/rustic",
+      src: "/rustic.png",
       title: "Rustic Charm",
       description: "A charming mix of wildflowers and rustic elements, perfect for creating a cozy, country-inspired atmosphere."
     }
