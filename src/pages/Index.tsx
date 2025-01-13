@@ -11,7 +11,7 @@ const Index = () => {
     { id: 1, title: "Spring Bouquet", price: "89.99", image: "/Spring Bouqet.png" },
     { id: 2, title: "Rose Collection", price: "129.99", image: "/Rose Collection].jpg" },
     { id: 3, title: "Wildflower Mix", price: "69.99", image: "/Wildflower Mix.jpg" },
-    { id: 4, title: "Luxury Peonies", price: "149.99", image: "/Luxury Peonies.jpg" },
+    { id: 4, title: "Luxury Peonies", price: "149.99", image: "Luxury Peonies.jpg" },
   ];
 
   useEffect(() => {
