@@ -1,10 +1,11 @@
 import Navigation from "@/components/Navigation";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const images = [
     {
@@ -39,6 +40,17 @@ const Gallery = () => {
     }
   ];
 
+  // Preload images
+  useEffect(() => {
+    images.forEach(image => {
+      const img = new Image();
+      img.src = image.src;
+      img.onload = () => {
+        setLoadedImages(prev => new Set([...prev, image.src]));
+      };
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary/30 to-white">
       <Navigation />
@@ -58,13 +70,20 @@ const Gallery = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
-              className="aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer"
+              className="aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer relative"
               onClick={() => setSelectedImage(index)}
             >
+              {/* Blur placeholder */}
+              <div className="absolute inset-0 bg-gray-200 animate-pulse" 
+                style={{ display: loadedImages.has(image.src) ? 'none' : 'block' }} 
+              />
               <img
                 src={image.src}
                 alt={image.title}
-                className="w-full h-full object-cover"
+                loading="lazy"
+                className={`w-full h-full object-cover transition-opacity duration-300 ${
+                  loadedImages.has(image.src) ? 'opacity-100' : 'opacity-0'
+                }`}
               />
             </motion.div>
           ))}
